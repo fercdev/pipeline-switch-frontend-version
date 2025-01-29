@@ -34,7 +34,7 @@ pipeline {
                     script {
                         echo "Moviendo archivos entre buckets s3..."
                         sh """
-                            aws s3 mv s3://${params.BUCKET_FUENTE}/${params.CARPETA_USUARIO}/${params.CARPETA_FUENTE}/ s3://${params.BUCKET_TARGET}/ --recursive
+                            aws s3 sync s3://${params.BUCKET_FUENTE}/${params.CARPETA_USUARIO}/${params.CARPETA_FUENTE}/ s3://${params.BUCKET_TARGET}/ --delete
                         """
                     }                   
                 }
