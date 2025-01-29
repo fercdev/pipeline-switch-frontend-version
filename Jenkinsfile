@@ -33,9 +33,9 @@ pipeline {
                 withAWS(credentials: 'aws-credentials-s3', region: 'us-east-1') {
                     script {
                         echo "Moviendo archivos entre buckets s3..."
-                        sh '''
-                            aws s3 mv s3://${params.BUCKET_FUENTE}/${params.CARPETA_USUARIO}/${params.CARPETA_FUENTE}/ s3://${params.CARPETA_FUENTE}/ --recursive
-                        '''
+                        sh """
+                            aws s3 mv s3://${params.BUCKET_FUENTE}/${params.CARPETA_USUARIO}/${params.CARPETA_FUENTE}/ s3://${params.BUCKET_TARGET}/ --recursive
+                        """
                     }                   
                 }
             }
