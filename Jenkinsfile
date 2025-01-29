@@ -32,7 +32,13 @@ pipeline {
             steps {
                 withAWS(credentials: 'aws-credentials-s3', region: 'us-east-1') {
                     script {
-                        echo "Moviendo archivos entre buckets s3..."
+                        echo "Limpiando bucket objetivo..."
+
+                        sh """
+                            aws s3 rm s3://${params.BUCKET_TARGET}/ --recursive
+                        """
+
+                        echo "Sincronizando archivos entre buckets s3..."
                         sh """
                             aws s3 sync s3://${params.BUCKET_FUENTE}/${params.CARPETA_USUARIO}/${params.CARPETA_FUENTE}/ s3://${params.BUCKET_TARGET}/ --delete
                         """
